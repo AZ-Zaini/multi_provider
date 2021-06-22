@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<WeightProvider>(
+    // With Singgle Provider
+    /* return ChangeNotifierProvider<WeightProvider>(
       create: (context) => WeightProvider(),
       child: ChangeNotifierProvider<HeightProvider>(
         create: (context) => HeightProvider(),
@@ -19,6 +20,21 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: HomePage(),
         ),
+      ),
+    ); */
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WeightProvider>(
+          create: (context) => WeightProvider(),
+        ),
+        ChangeNotifierProvider<HeightProvider>(
+          create: (context) => HeightProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
       ),
     );
   }
