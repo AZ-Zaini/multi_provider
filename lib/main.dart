@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var weightProvider = Provider.of<WeightProvider>(context);
+    var heightProvider = Provider.of<HeightProvider>(context);
+
     // With Singgle Provider
     /* return ChangeNotifierProvider<WeightProvider>(
       create: (context) => WeightProvider(),
