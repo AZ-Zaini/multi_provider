@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       ),
     ); */
 
+    // With Multi Provider
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<WeightProvider>(
