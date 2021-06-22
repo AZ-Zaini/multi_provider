@@ -10,18 +10,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // dengan menggunakan multiProider state bisa digunakan berlaung kali dengan di deklarasi ke variabel
+    var weightProvider = Provider.of<WeightProvider>(context);
+    var heightProvider = Provider.of<HeightProvider>(context);
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Your Weight (kg) :',
+              'Your Weight (kg) : ${weightProvider.weight.round().toString()}',
               style: TextStyle(
                 fontSize: 20,
               ),
             ),
-            Consumer<WeightProvider>(
+
+            // Menggunakan Consumer
+            /*  Consumer<WeightProvider>(
               builder: (context, weightProvider, _) => Slider(
                 min: 1,
                 max: 100,
@@ -34,17 +40,33 @@ class HomePage extends StatelessWidget {
                   weightProvider.weight = newValue;
                 },
               ),
+            ), */
+
+            // Menggunakan MultiProvider State
+            Slider(
+              min: 1,
+              max: 100,
+              divisions: 100,
+              label: weightProvider.weight.round().toString(),
+              value: weightProvider.weight,
+              onChanged: (newValue) {
+                newValue = newValue.roundToDouble();
+                print('Weight : $newValue');
+                weightProvider.weight = newValue;
+              },
             ),
             SizedBox(
               height: 20,
             ),
             Text(
-              'Your Height (cm):',
+              'Your Height (cm): ${heightProvider.height.round().toString()}',
               style: TextStyle(
                 fontSize: 20,
               ),
             ),
-            Consumer<HeightProvider>(
+
+            // Menggunakan Consummer
+            /* Consumer<HeightProvider>(
               builder: (context, heightProvider, _) => Slider(
                 min: 1,
                 max: 200,
@@ -59,6 +81,22 @@ class HomePage extends StatelessWidget {
                   heightProvider.height = newValue;
                 },
               ),
+            ), */
+
+            // Menggunakan MultiProvider State
+            Slider(
+              min: 1,
+              max: 200,
+              divisions: 200,
+              label: heightProvider.height.round().toString(),
+              value: heightProvider.height,
+              activeColor: Colors.pink,
+              inactiveColor: Colors.pink.withOpacity(0.2),
+              onChanged: (newValue) {
+                newValue = newValue.roundToDouble();
+                print('Height : $newValue');
+                heightProvider.height = newValue;
+              },
             ),
             SizedBox(
               height: 50,
